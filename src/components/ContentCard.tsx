@@ -16,10 +16,8 @@ export function ContentCard({title,content}) {
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
             </CardHeader>
-            <CardContent className="flex justify-center">
-                <h2 className="scroll-m-20 text-3xl text-black mt-2 ml-2 p-5 pb-2 font-extrabold tracking-tight lg:text-4xl">
+            <CardContent className="flex justify-center text-[45px]">
                     {content}
-                </h2>
             </CardContent>
             <CardFooter className="flex justify-end">
                 <Button>Refresh</Button>

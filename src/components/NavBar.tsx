@@ -6,9 +6,19 @@ import {
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import '../index.css'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {useEffect, useState} from "react";
+import {UserAuthContextProvider, useUserAuth} from "@/components/user-auth-context.tsx";
 
 
 export function NavBar() {
+    const [photoUrl,setPhotoUrl] = useState('')
+    const { user, logOut } = useUserAuth()
+    useEffect(() => {
+        if(user){
+            setPhotoUrl(user.photoURL)
+        }
+    },[user])
+
     return (
               <Menubar title="Dashboard">
                   <div className="hidden lg:flex space-x-4">
@@ -29,7 +39,7 @@ export function NavBar() {
               <MenubarMenu>
                   <MenubarTrigger>
                       <Avatar>
-                          <AvatarImage src="https://github.com/shadcn.png" />
+                          <AvatarImage src={`${photoUrl !== '' ? photoUrl : "https://github.com/shadcn.png"}`} />
                           <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                   </MenubarTrigger>
@@ -46,7 +56,7 @@ export function NavBar() {
                       <MenubarItem className="lg:hidden">
                           Student Management
                       </MenubarItem>
-                      <MenubarItem>
+                      <MenubarItem onClick={logOut}>
                           Logout
                       </MenubarItem>
                   </MenubarContent>
