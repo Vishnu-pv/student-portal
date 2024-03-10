@@ -12,7 +12,7 @@ import {
 
 export function ContentCard({title,content}) {
     return (
-        <Card className="w-[500px]">
+        <Card className="w-[500px] border-gray-300 dark:bg-[#121212]">
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
             </CardHeader>

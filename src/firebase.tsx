@@ -1,5 +1,6 @@
 import {GoogleAuthProvider,getAuth,signInWithPopup} from "firebase/auth";
 import {getFirestore,query,getDocs,collection,where,addDoc} from "firebase/firestore";
+import {getStorage,ref,uploadBytes,listAll} from "firebase/storage"
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -15,6 +16,26 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+export const storage = getStorage()
+
+export const fileUpload = async (file) => {
+    const storageRef = ref(storage,`repository/${file.name}`)
+    uploadBytes(storageRef,file).then((res) => {
+        console.log('File Uploaded',res)
+    })
+}
+
+export const fetchRepository = async () => {
+    const listRef = ref(storage,'repository/')
+    listAll(listRef)
+        .then((res) => {
+
+        }).catch((err)=>{
+        console.log('Error', err)
+    })
+}
+
 
 const googleProvider = new GoogleAuthProvider();
 export const signInWithGoogle = async () => {
